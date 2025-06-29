@@ -1,0 +1,128 @@
+{% extends 'contenido/base.html' %}
+{% load static %}
+{% block title %}Inicio - CursosDjango{% endblock %}
+
+{% block content %}
+  <!-- HERO SECTION CON IMAGEN DE FONDO Y EFECTO NEÓN -->
+  <section class="hero-section" style="
+       position: relative;
+       background: url('{% static "images/banner.jpg" %}') center/cover no-repeat; /* ← AQUI CAMBIAS LA IMAGEN */
+       height: 70vh; 
+       min-height: 400px; 
+       display: flex; 
+       align-items: center; 
+       justify-content: center; 
+       color: #fff;
+       border: 4px solid #00ffff; /* borde neón */
+       box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 60px #00ffff; 
+       border-radius: 15px;
+       overflow: hidden;">
+       
+    <!-- Overlay oscuro para mejorar la legibilidad -->
+    <div class="hero-overlay" style="
+         position: absolute; 
+         inset: 0; 
+         background-color: rgba(0, 0, 0, 0.5);">
+    </div>
+
+    <!-- Contenido centrado -->
+    <div class="hero-content container text-center fade-in" style="position: relative; z-index: 1;">
+      <h1 style="font-family: 'Roboto', sans-serif; font-size: 2.5rem; margin-bottom: 1rem; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);">
+        Aprende con CursosDjango
+      </h1>
+      <p style="font-size: 1.2rem; margin-bottom: 1.5rem;">
+        Descubre cursos de programación, bases de datos, desarrollo web y más. ¡Potencia tu futuro!
+      </p>
+      <a href="{% url 'cursos:lista' %}" class="btn btn-primary btn-hero" style="
+           padding: 0.75rem 1.5rem; 
+           font-size: 1rem; 
+           border-radius: 50px; 
+           transition: background 0.3s;">
+        Ver Cursos
+      </a>
+      <li class="nav-item">
+
+</li>
+
+    </div>
+  </section>
+
+  <!-- RESTO DEL CÓDIGO SE MANTIENE IGUAL -->
+  <section class="container my-5 fade-in" id="caracteristicas">
+    <h2 class="mb-4 text-center" style="
+        font-family: 'Roboto', sans-serif; 
+        font-size: 2rem; 
+        color: #00ffff; 
+        text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;">
+      Nuestras características
+    </h2>
+
+    <div class="row">
+      <!-- Tarjeta 1 -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center" style="
+            background: #fff;
+            border-radius: 0.5rem; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+            transition: transform 0.3s, box-shadow 0.3s;">
+          <img src="{% static 'images/mentores.jpg' %}" alt="Mentores" 
+               class="mb-3 img-fluid rounded-top" 
+               style="height: 120px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title" style="
+                font-family: 'Roboto', sans-serif; 
+                font-weight: 700; 
+                color: #0056b3;">Mentores Expertos</h5>
+            <p class="card-text" style="font-size: 0.95rem; color: #333;">
+              Accede a instructores con experiencia en la industria que te guiarán durante tu aprendizaje.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta 2 -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center" style="
+            background: #fff;
+            border-radius: 0.5rem; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+            transition: transform 0.3s, box-shadow 0.3s;">
+          <img src="{% static 'images/proyectos.jpg' %}" alt="Proyectos" 
+               class="mb-3 img-fluid rounded-top" 
+               style="height: 120px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title" style="
+                font-family: 'Roboto', sans-serif; 
+                font-weight: 700; 
+                color: #0056b3;">Proyectos Prácticos</h5>
+            <p class="card-text" style="font-size: 0.95rem; color: #333;">
+              Aplica lo que aprendes en proyectos reales que fortalecerán tu portafolio.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta 3 -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center" style="
+            background: #fff;
+            border-radius: 0.5rem; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+            transition: transform 0.3s, box-shadow 0.3s;">
+          <img src="{% static 'images/comunidad.jpg' %}" alt="Comunidad" 
+               class="mb-3 img-fluid rounded-top" 
+               style="height: 120px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title" style="
+                font-family: 'Roboto', sans-serif; 
+                font-weight: 700; 
+                color: #0056b3;">Comunidad Activa</h5>
+            <p class="card-text" style="font-size: 0.95rem; color: #333;">
+              Únete a foros y grupos de discusión para resolver dudas y compartir conocimientos.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

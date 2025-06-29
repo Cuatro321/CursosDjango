@@ -1,0 +1,54 @@
+
+{# contenido/templates/contenido/cursos.html #}
+{% extends 'contenido/base.html' %}
+{% load static %}
+{% block title %}Cursos Disponibles - CursosDjango{% endblock %}
+
+{% block content %}
+  <section class="section-cursos fade-in" style="padding:4rem 0;">
+    <div class="container">
+      <h2 class="text-center mb-4" style="
+           font-family: 'Orbitron', sans-serif;
+           font-size: 2rem;
+           color: #00ffff;
+           text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+         ">
+        Cursos Disponibles
+      </h2>
+      <div class="row g-4">
+        {% for curso in cursos %}
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+              {% if curso.imagen %}
+                <img
+                  src="{{ curso.imagen.url }}"
+                  class="card-img-top"
+                  alt="{{ curso.titulo }}"
+                  style="height: 160px; object-fit: cover;"
+                >
+              {% endif %}
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ curso.titulo }}</h5>
+                <p class="card-text flex-grow-1">
+                  {{ curso.descripcion|truncatewords:15 }}
+                </p>
+                <ul class="list-unstyled mb-3">
+                  <li><strong>Duración:</strong> {{ curso.duracion }} h</li>
+                  <li><strong>Precio:</strong> ${{ curso.precio }}</li>
+                  <li><strong>Nivel:</strong> {{ curso.get_nivel_display }}</li>
+                </ul>
+                <a href="#" class="btn btn-outline-primary mt-auto" style="border-radius:50px;">
+                  Ver más
+                </a>
+              </div>
+            </div>
+          </div>
+        {% empty %}
+          <div class="col-12">
+            <p class="text-center">No hay cursos disponibles por el momento.</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}
