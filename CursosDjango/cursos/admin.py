@@ -3,9 +3,7 @@ from .models import Curso
 
 @admin.register(Curso)
 class CursoAdmin(admin.ModelAdmin):
-    # Cabecera y título en el admin
     def get_model_perms(self, request):
-        # Oculta el modelo si no es superusuario (opcional)
         return super().get_model_perms(request)
 
     # Campos a mostrar en la lista de objetos
@@ -16,7 +14,6 @@ class CursoAdmin(admin.ModelAdmin):
         'publicado',
         'fecha_creado',
     )
-
     # Búsqueda por texto
     search_fields = ('titulo', 'descripcion')
 
@@ -48,8 +45,6 @@ class CursoAdmin(admin.ModelAdmin):
 
     # Orden por fecha de creación (de más antiguo a más reciente)
     ordering = ('fecha_creado',)
-
-# Cambiar texto de la app y modelo en la interfaz
 admin.site.site_header = 'CONVOCATORIAS'
 admin.site.index_title = 'Cursos'
 admin.site.site_title = 'Gestión de Convocatorias'

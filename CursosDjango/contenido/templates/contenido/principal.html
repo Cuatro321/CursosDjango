@@ -3,10 +3,10 @@
 {% block title %}Inicio - CursosDjango{% endblock %}
 
 {% block content %}
-  <!-- HERO SECTION CON IMAGEN DE FONDO Y EFECTO NEÓN -->
+
   <section class="hero-section" style="
        position: relative;
-       background: url('{% static "images/banner.jpg" %}') center/cover no-repeat; /* ← AQUI CAMBIAS LA IMAGEN */
+       background: url('{% static "images/banner.jpg" %}') center/cover no-repeat; 
        height: 70vh; 
        min-height: 400px; 
        display: flex; 
@@ -18,7 +18,7 @@
        border-radius: 15px;
        overflow: hidden;">
        
-    <!-- Overlay oscuro para mejorar la legibilidad -->
+   
     <div class="hero-overlay" style="
          position: absolute; 
          inset: 0; 
@@ -47,7 +47,7 @@
     </div>
   </section>
 
-  <!-- RESTO DEL CÓDIGO SE MANTIENE IGUAL -->
+
   <section class="container my-5 fade-in" id="caracteristicas">
     <h2 class="mb-4 text-center" style="
         font-family: 'Roboto', sans-serif; 
