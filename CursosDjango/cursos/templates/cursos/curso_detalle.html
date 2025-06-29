@@ -1,0 +1,79 @@
+{% extends 'contenido/base.html' %}
+{% block title %}{{ curso.titulo }} - CursosDjango{% endblock %}
+
+{% block content %}
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-md-6">
+        {% if curso.imagen %}
+          <img src="{{ curso.imagen.url }}" class="img-fluid rounded" alt="{{ curso.titulo }}">
+        {% endif %}
+      </div>
+      <div class="col-md-6">
+        <h1 class="neon-text">{{ curso.titulo }}</h1>
+        <p><strong>Descripción:</strong> {{ curso.descripcion }}</p>
+        <p><strong>Duración:</strong> {{ curso.duracion }} horas</p>
+        <p><strong>Precio:</strong> ${{ curso.precio }}</p>
+        <p><strong>Nivel:</strong> {{ curso.get_nivel_display }}</p>
+        <p><strong>Publicado en:</strong> {{ curso.fecha_creado|date:"d M Y H:i" }}</p>
+        <a href="{% url 'cursos:lista' %}" class="btn neon-button mt-4">
+          <i class="fas fa-arrow-left"></i> Volver a la lista
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+  .neon-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    color: #0ff;
+    background: transparent;
+    border: 2px solid #0ff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+    box-shadow: 0 0 5px #0ff, 0 0 20px #0ff inset;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .neon-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+    animation: neon-flow 2s linear infinite;
+  }
+
+  @keyframes neon-flow {
+    0% {
+      left: -100%;
+    }
+    50% {
+      left: 100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  .neon-button:hover {
+    background: #0ff;
+    color: #000;
+    box-shadow: 0 0 10px #0ff, 0 0 30px #0ff inset;
+    text-shadow: none;
+  }
+
+  .neon-button i {
+    margin-right: 8px;
+  }
+</style>
+{% endblock %}

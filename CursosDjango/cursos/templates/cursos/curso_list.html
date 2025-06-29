@@ -1,0 +1,33 @@
+{% extends 'contenido/base.html' %}
+{% block title %}Cursos - CursosDjango{% endblock %}
+
+{% block content %}
+  <section class="container py-5">
+    <h2 class="text-center mb-4 neon-text">Cursos Disponibles</h2>
+    <div class="row g-4">
+      {% for curso in cursos %}
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100 shadow-sm">
+            {% if curso.imagen %}
+              <img src="{{ curso.imagen.url }}" class="card-img-top" style="height:160px; object-fit:cover;" alt="{{ curso.titulo }}">
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ curso.titulo }}</h5>
+              <p class="card-text flex-grow-1">{{ curso.descripcion|truncatewords:15 }}</p>
+              <ul class="list-unstyled mb-3">
+                <li><strong>Duración:</strong> {{ curso.duracion }} </li>
+                <li><strong>Precio:</strong> ${{ curso.precio }}</li>
+                <li><strong>Nivel:</strong> {{ curso.get_nivel_display }}</li>
+              </ul>
+              <a href="{% url 'cursos:detalle' curso.pk %}" class="btn btn-outline-primary mt-auto" style="border-radius:50px;">
+                Ver más
+              </a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="col-12"><p class="text-center">No hay cursos disponibles.</p></div>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,92 @@
+
+{# contenido/templates/contenido/base.html #}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}CursosDjango{% endblock %}</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CSS personalizado -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark neon-nav">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'Principal' %}">
+        <img src="{% static 'images/logo.png' %}" alt="Logo" height="40">
+        <span class="brand-neon">CursosDjango</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarNav" aria-controls="navbarNav"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="{% url 'Principal' %}">Inicio</a></li>
+          <li class="nav-item">
+               <a class="nav-link" href="{% url 'cursos:lista' %}">Cursos</a>
+            </li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'Contacto' %}">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Contenido principal -->
+  <main class="py-5">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-dark">
+    <div class="container py-4">
+      <div class="row">
+        <div class="col-md-4">
+          <h5 class="neon-text">Sobre CursosDjango</h5>
+          <p>Esta es una página creada con Django para la materia Desarrollo Web Integral.</p>
+        </div>
+        <div class="col-md-4">
+          <h5 class="neon-text">Enlaces</h5>
+          <ul class="list-unstyled">
+            <li><a href="{% url 'Principal' %}">Inicio</a></li>
+            <li class="nav-item">
+             <a class="nav-link" href="{% url 'cursos:lista' %}">Cursos</a>
+            </li>
+            <li><a href="{% url 'Contacto' %}">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5 class="neon-text">Contacto</h5>
+          <p>
+            <img src="{% static 'images/gmail.png' %}" width="16"> info@cursosdjango.com
+          </p>
+          <p>
+            <img src="{% static 'images/what.png' %}" width="16"> +52 55 1234 5678
+          </p>
+        </div>
+      </div>
+      <div class="text-center mt-3">&copy; {% now "Y" %} CursosDjango</div>
+    </div>
+  </footer>
+
+  <!-- Botón “Volver arriba” -->
+  <button id="btn-back-to-top" title="Volver arriba">&uarr;</button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

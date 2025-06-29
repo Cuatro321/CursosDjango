@@ -1,0 +1,57 @@
+{% extends 'contenido/base.html' %}
+{% load static %}
+{% block title %}Contacto - CursosDjango{% endblock %}
+
+{% block content %}
+  <section class="section-contacto fade-in" style="
+       position: relative;
+       background: url('{% static "contenido/images/fondo-contacto.jpg" %}') center/cover no-repeat;
+       padding:4rem 0;">
+    <div class="overlay-contacto" style="position:absolute; inset:0; background-color: rgba(0,0,0,0.6);"></div>
+    <div class="container" style="position:relative; z-index:1; color:#fff;">
+      <h2 class="text-center mb-4" style="font-family: 'Roboto', sans-serif;">Contáctanos</h2>
+      {% if messages %}
+        {% for msg in messages %}
+          <div class="alert alert-{{ msg.tags }} mt-3">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <form id="contact-form" method="post" action="" style="background:#fff; padding:2rem; border-radius:0.5rem; color:#000;">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="id_nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="id_nombre" name="nombre" required>
+              <div class="invalid-feedback">Por favor ingresa tu nombre.</div>
+            </div>
+            <div class="mb-3">
+              <label for="id_correo" class="form-label">Correo electrónico</label>
+              <input type="email" class="form-control" id="id_correo" name="correo" required>
+              <div class="invalid-feedback">Por favor ingresa un correo válido.</div>
+            </div>
+            <div class="mb-3">
+              <label for="id_asunto" class="form-label">Asunto</label>
+              <input type="text" class="form-control" id="id_asunto" name="asunto">
+            </div>
+            <div class="mb-3">
+              <label for="id_mensaje" class="form-label">Mensaje</label>
+              <textarea class="form-control" id="id_mensaje" name="mensaje" rows="5" required></textarea>
+              <div class="invalid-feedback">Escribe tu mensaje.</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+          </form>
+        </div>
+      </div>
+      <div class="row mt-5 text-center">
+        <div class="col-md-6 mb-3">
+          <img src="{% static 'images/gmail.png' %}" alt="Email" width="24">
+          <p style="color:#fff;">info@cursosdjango.com</p>
+        </div>
+        <div class="col-md-6 mb-3">
+          <img src="{% static 'images/what.png' %}" alt="WhatsApp" width="24">
+          <p style="color:#fff;">+52 55 1234 5678</p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
