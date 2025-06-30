@@ -2,7 +2,7 @@ from pathlib import Path
 import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-...'  # tu clave real
+SECRET_KEY = 'django-insecure-...'  
 DEBUG = True
 ALLOWED_HOSTS = []
 
@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'contenido',
     'cursos.apps.CursosConfig',
+    'ckeditor'
 ]
 
 MIDDLEWARE = [
@@ -32,7 +33,7 @@ ROOT_URLCONF = 'CursosDjango.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # usamos app-level templates
+        'DIRS': [],  
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,3 +75,16 @@ MEDIA_URL = '/media/'
 # Carpeta en disco donde se guardan
 MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#CKEDITOR
+CKEDITOR_CONFIGS={
+    'default':{'toolbar':'Custom',
+    'toolbar_Custom':[
+        ['Bold','Italic','Underline'],
+        ['NumberedList','BulletedList','-','Outdent','Ident','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+        ['Link','Unlink'],
+        ['RemoveFormat','Source']
+    ]           
+    }
+}

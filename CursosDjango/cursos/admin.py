@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Curso
-
+from .models import Actividad
 @admin.register(Curso)
 class CursoAdmin(admin.ModelAdmin):
     def get_model_perms(self, request):
@@ -48,3 +48,13 @@ class CursoAdmin(admin.ModelAdmin):
 admin.site.site_header = 'CONVOCATORIAS'
 admin.site.index_title = 'Cursos'
 admin.site.site_title = 'Gestión de Convocatorias'
+
+
+class AdministrarActividades(admin.ModelAdmin):
+    list_display =('id','coment')
+    search_fields=('id','created')
+    date_hierarchy='created'
+    readonly_fields=('created','id')
+admin.site.register(Actividad,AdministrarActividades)
+
+
