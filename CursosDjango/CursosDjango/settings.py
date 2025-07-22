@@ -7,19 +7,19 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
-    # Django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Terceros
+    
     'ckeditor',
-    # Tuyas
+    
     'contenido',
     'cursos.apps.CursosConfig',
-    'usuarios'
+    'usuarios',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -104,5 +104,5 @@ CKEDITOR_CONFIGS = {
 
 
 # Redirección tras login
-LOGIN_REDIRECT_URL = '/'          # o '/cursos/' si prefieres ir ahí tras iniciar sesión
-LOGOUT_REDIRECT_URL = '/'         # Redirección tras cerrar sesión
+LOGIN_REDIRECT_URL = '/'          
+LOGOUT_REDIRECT_URL = '/'        

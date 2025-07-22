@@ -1,24 +1,184 @@
 {% extends 'contenido/base.html' %}
+{% load widget_tweaks %}
+
 {% block title %}
-  {% if form.instance.pk %}Editar Curso{% else %}Nuevo Curso{% endif %} –
-  CursosDjango
+  {% if form.instance.pk %}Editar{% else %}Nuevo{% endif %} Curso – CursosDjango
+{% endblock %}
+
+{% block extra_head %}
+<style>
+  body {
+    background: #0a0a0a;
+    color: #0ff;
+    min-height: 100vh;
+  }
+
+  .form-container {
+    background: #111;
+    max-width: 600px;
+    margin: 2rem auto 4rem;
+    padding: 2rem 2rem 3rem;
+    border-radius: 12px;
+    box-shadow:
+      0 0 15px rgba(0, 255, 255, 0.6),
+      inset 0 0 10px rgba(0, 255, 255, 0.3);
+  }
+
+  /* Imagen estilo polaroid */
+  .current-image-polaroid {
+    max-width: 320px;
+    margin: 0 auto 2rem;
+    padding: 15px 15px 35px;
+    background: #111;
+    border: 10px solid #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+    transform: rotate(-3deg);
+    transition: transform 0.3s ease;
+  }
+
+  .current-image-polaroid:hover {
+    transform: rotate(0deg) scale(1.05);
+    box-shadow: 0 15px 40px rgba(0,255,255,0.8);
+  }
+
+  .current-image-polaroid img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+  }
+
+  h1 {
+    color: #0ff;
+    text-shadow:
+      0 0 10px #0ff,
+      0 0 20px #0ff;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  label {
+    display: block;
+    margin-top: 1.2rem;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+    color: #0ff;
+    text-shadow: 0 0 5px #0ff;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="file"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background: #222;
+    border: 2px solid #0ff;
+    border-radius: 8px;
+    color: #0ff;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  input[type="email"]:focus,
+  input[type="file"]:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #00ffff;
+    box-shadow: 0 0 8px #0ff inset;
+    outline: none;
+    background: #111;
+  }
+
+  /* Botones neón */
+  .btn-neon-blue {
+    background: transparent;
+    border: 2px solid #0ff;
+    color: #0ff;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 0.6rem 1.8rem;
+    text-shadow: 0 0 5px #0ff, 0 0 12px #0ff;
+    box-shadow: 0 0 12px #0ff inset;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    display: inline-block;
+    text-decoration: none;
+  }
+  .btn-neon-blue:hover,
+  .btn-neon-blue:focus {
+    background-color: #0ff;
+    color: #000;
+    box-shadow: 0 0 25px #0ff inset, 0 0 20px #0ff;
+    outline: none;
+  }
+
+  .btn-neon-red {
+    background: transparent;
+    border: 2px solid #f00;
+    color: #f00;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 0.6rem 1.8rem;
+    text-shadow: 0 0 5px #f00, 0 0 12px #f00;
+    box-shadow: 0 0 12px #f00 inset;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    margin-left: 1rem;
+  }
+  .btn-neon-red:hover,
+  .btn-neon-red:focus {
+    background-color: #f00;
+    color: #000;
+    box-shadow: 0 0 25px #f00 inset, 0 0 20px #f00;
+    outline: none;
+  }
+
+  .button-group {
+    margin-top: 2rem;
+    text-align: center;
+  }
+</style>
 {% endblock %}
 
 {% block content %}
-<div class="container py-5">
+<div class="form-container">
+  {% if form.instance.imagen %}
+  <div class="current-image-polaroid" title="Imagen actual del curso">
+    <img src="{{ form.instance.imagen.url }}" alt="Imagen actual del curso">
+  </div>
+  {% endif %}
+
   <h1>
-    {% if form.instance.pk %}Editar{% else %}Crear{% endif %} Curso
+    {% if form.instance.pk %}Editar{% else %}Nuevo{% endif %} Curso
   </h1>
-  <form method="post" enctype="multipart/form-data" class="mt-4">
+
+  <form method="post" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
-    {{ form.media }} 
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">
-      Guardar
-    </button>
-    <a href="{% url 'cursos:lista' %}" class="btn btn-secondary">
-      Cancelar
-    </a>
+    {{ form.media }}
+
+    {% for field in form %}
+      <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %} *{% endif %}</label>
+      {{ field|add_class:"" }}
+      {% if field.help_text %}
+        <small style="color:#0ff; display:block; margin-bottom: 1rem;">{{ field.help_text }}</small>
+      {% endif %}
+      {% for error in field.errors %}
+        <div style="color: #f00; font-weight: 700;">{{ error }}</div>
+      {% endfor %}
+    {% endfor %}
+
+    <div class="button-group">
+      <button type="submit" class="btn-neon-blue">Guardar</button>
+      <a href="{% url 'cursos:lista' %}" class="btn-neon-red">Cancelar</a>
+    </div>
   </form>
 </div>
 {% endblock %}

@@ -38,7 +38,7 @@
 
           {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'admin:index' %}">¡Hola, {{ user.username }}!</a>
+              <a class="nav-link" href="{% url 'admin:index' %}">{{ user.username }}</a>
             </li>
             <li class="nav-item d-flex align-items-center">
               <form method="post" action="{% url 'logout' %}" class="d-inline m-0 p-0">
