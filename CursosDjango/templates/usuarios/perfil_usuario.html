@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Mi Perfil{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow">
+    <div class="card-header neon-text">
+      <h4>Mi perfil</h4>
+    </div>
+    <div class="card-body">
+      <p><strong>Usuario:</strong> {{ usuario.username }}</p>
+      <p><strong>Nombre completo:</strong> {{ usuario.get_full_name|default:"No proporcionado" }}</p>
+      <p><strong>Correo:</strong> {{ usuario.email }}</p>
+      <p><strong>Fecha de registro:</strong> {{ usuario.date_joined|date:"d M Y H:i" }}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

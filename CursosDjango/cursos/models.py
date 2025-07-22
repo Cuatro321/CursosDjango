@@ -18,32 +18,27 @@ class Curso(models.Model):
     )
     publicado    = models.BooleanField("Publicado", default=False)
     fecha_creado = models.DateTimeField("Fecha de creación", auto_now_add=True)
-    imagen       = models.ImageField(
-        "Imagen del curso",
-        upload_to='cursos/',
-        null=True,
-        blank=True
-    )
+    imagen       = models.ImageField("Imagen del curso", upload_to='cursos/', null=True, blank=True)
 
     class Meta:
-        ordering = ['fecha_creado']  # de más antigua a más reciente
+        ordering = ['fecha_creado']
         verbose_name = "Curso"
         verbose_name_plural = "Cursos"
 
     def __str__(self):
         return self.titulo
-    
-class Actividad(models.Model):
-   id=models.AutoField(primary_key=True,verbose_name="Clave de Actividad")
-   curso =  models.ForeignKey(Curso,
-             on_delete=models.CASCADE,verbose_name="Curso")
-   created = models.DateTimeField(auto_now_add=True,verbose_name="Registrado")
-   coment= RichTextField(verbose_name="Descripcion de Actividad")
 
-   class Meta:
-      verbose_name= "Actividad"
-      verbose_name_plural ="Actividades"
-      ordering = ["-created"]
-      
-      def __str__(self):
-        return self.coment
+
+class Actividad(models.Model):
+    curso   = models.ForeignKey(Curso, on_delete=models.CASCADE, verbose_name="Curso")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Registrado")
+    coment  = RichTextField(verbose_name="Descripción de Actividad")
+
+    class Meta:
+        verbose_name = "Actividad"
+        verbose_name_plural = "Actividades"
+        ordering = ["-created"]
+
+    def __str__(self):
+       
+        return self.coment[:30] + '…'

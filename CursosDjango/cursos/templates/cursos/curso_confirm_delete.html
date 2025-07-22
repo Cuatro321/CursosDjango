@@ -1,0 +1,15 @@
+{% extends 'contenido/base.html' %}
+{% block title %}Eliminar Curso – CursosDjango{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h1>Eliminar curso</h1>
+  <p>¿Seguro que quieres eliminar “<strong>{{ object.titulo }}</strong>”?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    <a href="{% url 'cursos:detalle' object.pk %}"
+       class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+{% endblock %}

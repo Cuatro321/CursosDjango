@@ -1,5 +1,3 @@
-
-{# contenido/templates/contenido/base.html #}
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
@@ -33,12 +31,27 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item"><a class="nav-link" href="{% url 'Principal' %}">Inicio</a></li>
-          <li class="nav-item">
-               <a class="nav-link" href="{% url 'cursos:lista' %}">Cursos</a>
-            </li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'cursos:lista' %}">Cursos</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'Contacto' %}">Contacto</a></li>
+
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'admin:index' %}">¡Hola, {{ user.username }}!</a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <form method="post" action="{% url 'logout' %}" class="d-inline m-0 p-0">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-link nav-link p-0 m-0" style="color: white; text-decoration: none;">
+                  Salir
+                </button>
+              </form>
+            </li>
+          {% else %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Registrarse</a></li>
+          {% endif %}
         </ul>
       </div>
     </div>
@@ -61,20 +74,14 @@
           <h5 class="neon-text">Enlaces</h5>
           <ul class="list-unstyled">
             <li><a href="{% url 'Principal' %}">Inicio</a></li>
-            <li class="nav-item">
-             <a class="nav-link" href="{% url 'cursos:lista' %}">Cursos</a>
-            </li>
+            <li><a href="{% url 'cursos:lista' %}">Cursos</a></li>
             <li><a href="{% url 'Contacto' %}">Contacto</a></li>
           </ul>
         </div>
         <div class="col-md-4">
           <h5 class="neon-text">Contacto</h5>
-          <p>
-            <img src="{% static 'images/gmail.png' %}" width="16"> info@cursosdjango.com
-          </p>
-          <p>
-            <img src="{% static 'images/what.png' %}" width="16"> +52 55 1234 5678
-          </p>
+          <p><img src="{% static 'images/gmail.png' %}" width="16"> info@cursosdjango.com</p>
+          <p><img src="{% static 'images/what.png' %}" width="16"> +52 55 1234 5678</p>
         </div>
       </div>
       <div class="text-center mt-3">&copy; {% now "Y" %} CursosDjango</div>

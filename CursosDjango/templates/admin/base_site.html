@@ -1,0 +1,23 @@
+{# templates/admin/base_site.html #}
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}CursosDjango Admin | {{ site_title }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+  <a href="{% url 'admin:index' %}">
+    <img src="{% static 'images/logo.png' %}" alt="Logo" height="30">
+    CursosDjango
+  </a>
+</h1>
+{% endblock %}
+
+{% block nav-global %}
+{{ block.super }}
+<div class="user-tools">
+  <span>Bienvenido, {{ user.get_username }}.</span>
+  <a href="{% url 'admin:password_change' %}">Cambiar contraseña</a> |
+  <a href="{% url 'admin:logout' %}">Salir</a>
+</div>
+{% endblock %}

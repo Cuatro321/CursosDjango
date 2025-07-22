@@ -1,38 +1,19 @@
 from django.contrib import admin
-from .models import Curso
-from .models import Actividad
+from .models import Curso, Actividad
+
 @admin.register(Curso)
 class CursoAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        return super().get_model_perms(request)
-
-    # Campos a mostrar en la lista de objetos
-    list_display = (
-        'titulo',
-        'nivel',
-        'precio',
-        'publicado',
-        'fecha_creado',
-    )
-    # Búsqueda por texto
-    search_fields = ('titulo', 'descripcion')
-
-    # Filtros laterales
-    list_filter = ('nivel', 'publicado', 'fecha_creado')
-
-    # Filtros por fecha (barra superior)
-    date_hierarchy = 'fecha_creado'
-
-    # Campos de solo lectura
+    list_display    = ('titulo','nivel','precio','publicado','fecha_creado')
+    search_fields   = ('titulo','descripcion')
+    list_filter     = ('nivel','publicado','fecha_creado')
+    date_hierarchy  = 'fecha_creado'
     readonly_fields = ('fecha_creado',)
-
-    # Reordenar campos y renombrar etiquetas en el formulario
     fieldsets = (
         (None, {
             'fields': (
-                ('titulo', 'nivel'),
+                ('titulo','nivel'),
                 'descripcion',
-                ('precio', 'duracion', 'publicado'),
+                ('precio','duracion','publicado'),
                 'imagen',
             ),
             'description': 'Registro de un nuevo curso',
@@ -42,19 +23,16 @@ class CursoAdmin(admin.ModelAdmin):
             'classes': ('collapse',),
         }),
     )
-
-    # Orden por fecha de creación (de más antiguo a más reciente)
     ordering = ('fecha_creado',)
-admin.site.site_header = 'CONVOCATORIAS'
-admin.site.index_title = 'Cursos'
-admin.site.site_title = 'Gestión de Convocatorias'
 
-
-class AdministrarActividades(admin.ModelAdmin):
-    list_display =('id','coment')
-    search_fields=('id','created')
-    date_hierarchy='created'
-    readonly_fields=('created','id')
-admin.site.register(Actividad,AdministrarActividades)
-
-
+@admin.register(Actividad)
+class ActividadAdmin(admin.ModelAdmin):
+    list_display    = ('curso','created')
+    search_fields   = ('coment',)
+    date_hierarchy  = 'created'
+    readonly_fields = ('created',)
+    
+# Personalización global del admin
+admin.site.site_header  = 'CONVOCATORIAS'
+admin.site.index_title  = 'Cursos'
+admin.site.site_title   = 'Gestión de Convocatorias'
