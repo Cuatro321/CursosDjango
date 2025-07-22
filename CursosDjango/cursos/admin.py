@@ -36,3 +36,4 @@ class ActividadAdmin(admin.ModelAdmin):
 admin.site.site_header  = 'CONVOCATORIAS'
 admin.site.index_title  = 'Cursos'
 admin.site.site_title   = 'Gestión de Convocatorias'
+
