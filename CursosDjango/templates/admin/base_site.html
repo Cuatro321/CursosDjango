@@ -2,22 +2,95 @@
 {% extends "admin/base.html" %}
 {% load static %}
 
-{% block title %}CursosDjango Admin | {{ site_title }}{% endblock %}
+{# 1) Título de la pestaña #}
+{% block title %}CursosDjango Admin | Panel de Administración{% endblock %}
 
-{% block branding %}
-<h1 id="site-name">
-  <a href="{% url 'admin:index' %}">
-    <img src="{% static 'images/logo.png' %}" alt="Logo" height="30">
-    CursosDjango
-  </a>
-</h1>
+{# 2) Inyectamos Google Fonts + estilos retro inline #}
+{% block extrahead %}
+  {{ block.super }}
+  <!-- Google Fonts: Press Start 2P (pixel font) -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* --- Ocultar la barra de usuario por defecto --- */
+    #user-tools { display: none !important; }
+    
+    /* --- Header completo --- */
+    #header {
+      background: #111;
+      border-bottom: 4px solid #0ff;
+      height: 60px;
+      position: relative;
+    }
+    /* --- Nuestro header custom --- */
+    #custom-header {
+      display: flex;
+      align-items: center;
+      height: 60px;
+      padding: 0 1rem;
+      font-family: 'Press Start 2P', monospace;
+    }
+    #custom-header .custom-logo img {
+      height: 40px;
+      margin-right: 0.5rem;
+    }
+    #custom-header .site-name {
+      color: #0ff;
+      text-shadow:
+        0 0 5px #0ff,
+        0 0 10px #0ff,
+        0 0 20px #0ff;
+      font-size: 1rem;
+    }
+    /* --- Links de usuario (derecha) --- */
+    .custom-user-tools {
+      position: absolute;
+      right: 1rem;
+      top: 0;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.7rem;
+    }
+    .custom-user-tools a,
+    .custom-user-tools .welcome {
+      color: #0ff;
+      margin: 0 0.5rem;
+      text-decoration: none;
+      text-shadow:
+        0 0 5px #0ff,
+        0 0 10px #0ff;
+    }
+    .custom-user-tools a:hover {
+      text-decoration: underline;
+    }
+    /* --- Fondo general --- */
+    body {
+      background: #000;
+      color: #ccc;
+      font-family: 'Press Start 2P', monospace;
+    }
+  </style>
 {% endblock %}
 
+
+{% block branding %}
+  <div id="custom-header">
+    <a class="custom-logo" href="{% url 'admin:index' %}">
+      <img src="{% static 'images/logo.png' %}" alt="CursosDjango">
+      <span class="site-name">CursosDjango</span>
+    </a>
+  </div>
+{% endblock %}
+
+{# 4) Barra de usuario única #}
 {% block nav-global %}
-{{ block.super }}
-<div class="user-tools">
-  <span>Bienvenido, {{ user.get_username }}.</span>
-  <a href="{% url 'admin:password_change' %}">Cambiar contraseña</a> |
-  <a href="{% url 'admin:logout' %}">Salir</a>
-</div>
+  <div class="custom-user-tools">
+    <span class="welcome">Bienvenido, {{ user.get_username }}.</span>
+    <a href="{% url 'Principal' %}">Ver el sitio</a>
+    <span>|</span>
+    <a href="{% url 'admin:password_change' %}">Cambiar contraseña</a>
+    <span>|</span>
+    <a href="{% url 'admin:logout' %}">Cerrar sesión</a>
+  </div>
 {% endblock %}
