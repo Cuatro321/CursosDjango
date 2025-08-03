@@ -1,47 +1,57 @@
-{# templates/admin/base_site.html #}
 {% extends "admin/base.html" %}
 {% load static %}
 
-{# 1) Título de la pestaña #}
-{% block title %}CursosDjango Admin | Panel de Administración{% endblock %}
+{# 1) Título del sitio #}
+{% block title %}Panel Administrador | Panel de Administración{% endblock %}
 
-{# 2) Inyectamos Google Fonts + estilos retro inline #}
+{# 2) Estilos y fuente Orbitron para mejor legibilidad #}
 {% block extrahead %}
   {{ block.super }}
-  <!-- Google Fonts: Press Start 2P (pixel font) -->
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Orbitron -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* --- Ocultar la barra de usuario por defecto --- */
-    #user-tools { display: none !important; }
-    
-    /* --- Header completo --- */
+    /* Ocultar barra de usuario original */
+    #user-tools {
+      display: none !important;
+    }
+
+    /* Encabezado */
     #header {
       background: #111;
       border-bottom: 4px solid #0ff;
       height: 60px;
       position: relative;
     }
-    /* --- Nuestro header custom --- */
+
+    /* Cabecera personalizada */
     #custom-header {
       display: flex;
       align-items: center;
       height: 60px;
       padding: 0 1rem;
-      font-family: 'Press Start 2P', monospace;
+      font-family: 'Orbitron', sans-serif;
     }
-    #custom-header .custom-logo img {
-      height: 40px;
+
+    .custom-logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .custom-logo img {
+      height: 30px;
       margin-right: 0.5rem;
     }
-    #custom-header .site-name {
+
+    .site-name {
       color: #0ff;
+      font-size: 1.2rem;
       text-shadow:
         0 0 5px #0ff,
-        0 0 10px #0ff,
-        0 0 20px #0ff;
-      font-size: 1rem;
+        0 0 10px #0ff;
     }
-    /* --- Links de usuario (derecha) --- */
+
+    /* Herramientas de usuario */
     .custom-user-tools {
       position: absolute;
       right: 1rem;
@@ -49,9 +59,10 @@
       height: 60px;
       display: flex;
       align-items: center;
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.7rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
     }
+
     .custom-user-tools a,
     .custom-user-tools .welcome {
       color: #0ff;
@@ -61,29 +72,31 @@
         0 0 5px #0ff,
         0 0 10px #0ff;
     }
+
     .custom-user-tools a:hover {
       text-decoration: underline;
     }
-    /* --- Fondo general --- */
+
+    /* Fondo general */
     body {
       background: #000;
       color: #ccc;
-      font-family: 'Press Start 2P', monospace;
+      font-family: 'Orbitron', sans-serif;
     }
   </style>
 {% endblock %}
 
-
+{# Branding del panel #}
 {% block branding %}
   <div id="custom-header">
     <a class="custom-logo" href="{% url 'admin:index' %}">
-      <img src="{% static 'images/logo.png' %}" alt="CursosDjango">
-      <span class="site-name">CursosDjango</span>
+      <img src="{% static 'images/logoadmin.png' %}" alt="Panel Administrador">
+      <span class="site-name">Panel Administrador</span>
     </a>
   </div>
 {% endblock %}
 
-{# 4) Barra de usuario única #}
+{# Barra de navegación personalizada #}
 {% block nav-global %}
   <div class="custom-user-tools">
     <span class="welcome">Bienvenido, {{ user.get_username }}.</span>
