@@ -7,6 +7,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    """'jazzmin',"""
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -21,6 +22,22 @@ INSTALLED_APPS = [
     'usuarios',
     'widget_tweaks'
 ]
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Panel de Administración",
+    "site_header": "Administración BiciTours",
+    "site_brand": "BiciTours MX",
+    "welcome_sign": "Bienvenido al panel",
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "icons": {
+        "auth": "fas fa-users",
+        "auth.user": "fas fa-user",
+        "auth.group": "fas fa-users-cog",
+    },
+    "order_with_respect_to": ["auth", "recorridos", "inscripciones", "carrito"],
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
