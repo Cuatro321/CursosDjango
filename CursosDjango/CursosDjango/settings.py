@@ -7,7 +7,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
-    """'jazzmin',"""
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -23,7 +23,7 @@ INSTALLED_APPS = [
     'widget_tweaks'
 ]
 
-JAZZMIN_SETTINGS = {
+"""JAZZMIN_SETTINGS = {
     "site_title": "Panel de Administración",
     "site_header": "Administración BiciTours",
     "site_brand": "BiciTours MX",
@@ -36,7 +36,7 @@ JAZZMIN_SETTINGS = {
         "auth.group": "fas fa-users-cog",
     },
     "order_with_respect_to": ["auth", "recorridos", "inscripciones", "carrito"],
-}
+}"""
 
 
 MIDDLEWARE = [
@@ -73,6 +73,13 @@ WSGI_APPLICATION = 'CursosDjango.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+"""
+DATABASES = {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cursos',
         'USER': 'root',
@@ -81,7 +88,7 @@ DATABASES = {
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'},
     }
-}
+}"""
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
